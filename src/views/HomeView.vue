@@ -1,6 +1,5 @@
 <template>
     <div class="home-container">
-        <SideBar />
         <h1>Home</h1>
         <!-- <pre>{{ user }}</pre> -->
         <div class="user">
