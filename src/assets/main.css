@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: sans-serif;
+}
+
+html, body {
+    height: 100%
+}
+
+div#app {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    padding: 0.5rem 2rem;
+    border: 0px;
+    background-color: rgb(34, 110, 110);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: white;
+}
+
+
+button:hover {
+    background-color: rgb(40, 120, 120);
+}
+
+
+input {
+    padding: 0.5rem 2rem;
+    border:  1px solid rgb(145, 145, 145);
+    border-radius: 0.5rem;
+
+}
