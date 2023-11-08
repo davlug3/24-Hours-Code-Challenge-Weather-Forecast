@@ -1,11 +1,10 @@
 <template>
     <div class="container">
-        <h1>Hello World!</h1>
-        <h2>Welcome!</h2>
-        <div class="login">
-            <form @submit.prevent="">
+        <div class="content">
+            <p>Welcome to the weather forecast web application. Please login your github user to use the application and view weather in your city.</p>
+            <div class="login">
                 <button @click="login"> Login via Github</button>
-            </form>
+            </div>
         </div>
 
     </div>
@@ -15,7 +14,7 @@
 <script setup>
     import { useAuth0  } from '@auth0/auth0-vue'
 
-    const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
+    const { loginWithRedirect} = useAuth0();
 
 
     const login = () => {
@@ -27,20 +26,30 @@
 
 <style scoped>
     .container {
-        border: 1px solid rgb(175, 175, 175);
-        border-radius: 0.5em;
-        padding: 1em;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 500px;
-        height: 600px;
+      
     }
+
+
+    .content {
+        width: 50em;
+    
+    }
+
+
+
+    p {
+        font-size: 1.6em;
+    }
+    
 
     button {
         padding: 0.5em 3em;
         font-size: 1.1em;
+        margin-top: 3em;
     }
 
     h1 {

@@ -1,15 +1,16 @@
 <template>
-    <div class="home-container">
-        <h1>Home</h1>
+    <div class="container">
         <!-- <pre>{{ user }}</pre> -->
-        <div class="user">
-            <div class="field"><p>username: </p><p>{{ user.nickname }}</p></div>
-            <div class="field"><p>url: </p><p><a :href="url">{{ url }}</a></p></div>
-        </div>
-        <div class="field"><p>city: </p>
-            <input type="text" v-model="city">
-            <div><button type="button" @click="viewWeather(city)">weather</button></div>
-        </div>
+       
+            <div class="field">{{ user.nickname }}</div>
+            <div class="field"><a :href="url">{{ url }}</a></div>
+
+<div class="field">
+    
+                <input type="text" v-model="city" placeholder="City">
+                <div><button type="button" @click="viewWeather(city)">Display Weather</button></div>
+</div>
+
     </div>
 </template>
 
@@ -19,7 +20,6 @@
     import router from '../router'
     import {useAuth0} from '@auth0/auth0-vue'
 
-    import SideBar from '@/components/icons/SideBar.vue';
     
     
     const auth0 = useAuth0()
@@ -39,20 +39,23 @@
 </script>
 
 <style scoped>
-    .home-container {
-        display: flex;
-        flex-direction: column;
-    }
 
+    .container {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+
+    }
     .user {
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column wrap;
     }
     .field {
-        border: 1px solid rgb(156, 156, 156);
+        width: 30em;
+        text-align: center;
         padding: 1.5em;
         margin: 0.15em;
-        border-radius: 5px;
+     
     }
 
 
@@ -62,7 +65,8 @@
     }
 
     button {
-        width: 100%
+        margin-top: 2em;;
+        width: 15em;
     }
 
     p:first-child {

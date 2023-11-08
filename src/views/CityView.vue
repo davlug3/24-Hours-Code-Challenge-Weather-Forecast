@@ -1,12 +1,29 @@
 <template>
-    <div class="city-container">
-        <h1>Weather forecast - {{ city  }}</h1>
-        <div class="weather-items">
-          <div v-for="item in data" :key="item.key" class="weather-item" :class="{'desktop-only': item.desktopOnly}">
-            <div class="weather-item-title">{{ item.name }}</div>
-            <div class="weather-item-value">{{ item.value }}</div>
-          </div>
+    <div class="container">
+
+        <div class="content">
+          <table>
+            <thead>
+              <tr class="header-1">
+                <th v-for="item in data" :key="item.key">{{  item.name_a }}</th>
+              </tr>
+              <tr class="header-2">
+                <th v-for="item in data" :key="item.key">{{  item.name_b }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td v-for="item in data" :key="item.key"> {{  item.value }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <button>Back</button>
         </div>
+        
+
+
     </div> 
 
 </template>    
@@ -25,44 +42,59 @@
     const data = ref([
       {
         key: "dt",
-        name: "Data/Time",
+        name_a: "Date",
+        name_b: "(mm/dd/yyyy)",
         value: '',
       },
       {
         key: "temp",
-        name: "Temperature",
+        name_b: "Temp(F)",
         value: 0
       },
       {
         key: "description",
-        name: "Description",
+        name_b: "Description",
         value: '', desktopOnly: true
       },
       {
         key: "main",
-        name: "Main",
+        name_b: "Main",
         value: '', 
         desktopOnly: true
       },
       {
         key: "pressure",
-        name: "Pressure",
+        name_b: "Pressure",
         value: '', 
         desktopOnly: true
       },
       {
         key: "humidity",
-        name: "Humidity",
+        name_b: "Humidity",
         value: '', 
         desktopOnly: true
       },
     ])
 
 
+    const getHeaderRows = computed(() => {
+      return data.value.map(x=> {
+        return Array.isArray(x.name) ? [...x.name] : [x.name]
+      })
+    })
 
 
 
-    const city = computed(() => (route.params.city).toUpperCase())
+    const numOfHeaderRows = computed(()=> {
+      return getHeaderRows.value.reduce((prev, curr)=> {
+        return curr.length > prev ? curr.length : prev
+      }, 0)
+    })
+    
+    console.log("getHeaderRows: ", getHeaderRows.value, numOfHeaderRows.value);
+
+
+    const city = ref('')
 
     const getWeatherForecast = async () => {
 
@@ -76,6 +108,7 @@
            const response = await axios.get(apiUrl_geotag);
            lat.value = response.data[0].lat
            lon.value = response.data[0].lon
+           city.value = response.data[0].name
            
            if (lat.value && lon.value) {
              const apiUrl_forecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat.value}&lon=${lon.value}&appid=${owm_api_key}`;
@@ -112,33 +145,48 @@
 
 <style scoped>
 
-  .weather-items {
+  .container {
     display: flex;
-    width: 100%;
-    gap: 3px;
-  }
-
-  .weather-item {
-    border: 1px solid #aaa;
-    display: flex;
-    flex-flow: column;
-    padding: 1em;
-    width: 100%;
+    justify-content: center;
     align-items: center;
   }
 
-  .weather-item-title {
-    border-bottom: 2px solid rgb(92, 15, 15);
-    width: 100%;
-    padding: 0.2em;
-    margin: 0.5em;
-    text-align: center;
-    color: #9e2a2a;
+  .content {
+    width: 60em;
+    display: flex;
+    flex-flow: column;
+
   }
 
 
+  table {
+    border-collapse: collapse;
+    width: 100%
+  }
+  
+
+  .header-1 {
+    background-color: #ddd ;
+
+  }
+  .header-2 {
+    background-color: #bbb ;
+
+  }
+
+  td, th {
+    border: 1px solid #444;
+    font-size: 1.5em;
+    padding: 0.4em;
+    text-align: center;
+  }
 
 
+  button {
+    width: 10rem;
+    margin-left:auto;
+    margin-top: 10em;
+  }
   @media (max-width: 500px) {
     .desktop-only {
       display: none;
