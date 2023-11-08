@@ -5,11 +5,10 @@
             <div class="field">{{ user.nickname }}</div>
             <div class="field"><a :href="url">{{ url }}</a></div>
 
-<div class="field">
-    
+            <div class="field">
                 <input type="text" v-model="city" placeholder="City">
                 <div><button type="button" @click="viewWeather(city)">Display Weather</button></div>
-</div>
+            </div>
 
     </div>
 </template>
@@ -51,12 +50,15 @@
         flex-flow: column wrap;
     }
     .field {
-        width: 30em;
+        max-width: 50em;
         text-align: center;
-        padding: 1.5em;
-        margin: 0.15em;
+        padding: 1.5em 0.5em;
+        margin: 1.5em 0.15em;
+        font-size: 1.3em;
      
     }
+
+    
 
 
     input {

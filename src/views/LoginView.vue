@@ -35,19 +35,23 @@
 
 
     .content {
-        width: 50em;
+        max-width: 50em;
+        
     
     }
+
 
 
 
     p {
         font-size: 1.6em;
+        
+
     }
     
 
     button {
-        padding: 0.5em 3em;
+        padding: 0.5em 2em;
         font-size: 1.1em;
         margin-top: 3em;
     }
@@ -62,4 +66,14 @@
         font-size: 2em;
         margin-bottom: 0.8em;
     }
+
+
+
+    @media (max-width: 830px ) {
+    .content {
+        margin: 2em;
+    }
+
+    
+}
 </style>

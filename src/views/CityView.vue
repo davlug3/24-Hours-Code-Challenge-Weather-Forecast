@@ -5,15 +5,15 @@
           <table>
             <thead>
               <tr class="header-1">
-                <th v-for="item in data" :key="item.key">{{  item.name_a }}</th>
+                <th v-for="item in data" :key="item.key" :class="{'desktop-only': item.desktopOnly}">{{  item.name_a }}</th>
               </tr>
               <tr class="header-2">
-                <th v-for="item in data" :key="item.key">{{  item.name_b }}</th>
+                <th v-for="item in data" :key="item.key"  :class="{'desktop-only': item.desktopOnly}">{{  item.name_b }}</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td v-for="item in data" :key="item.key"> {{  item.value }}</td>
+                <td v-for="item in data" :key="item.key"  :class="{'desktop-only': item.desktopOnly}"> {{  item.value }}</td>
               </tr>
             </tbody>
           </table>
@@ -187,9 +187,14 @@
     margin-left:auto;
     margin-top: 10em;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 800px) {
     .desktop-only {
       display: none;
+    }
+
+    table {
+      width: 90vw;
+      margin: 2em;
     }
   }
 </style>
