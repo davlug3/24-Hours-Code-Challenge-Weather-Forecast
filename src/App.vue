@@ -1,25 +1,12 @@
 <script setup>
-import {watch} from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
-import NavBar from './components/icons/NavBar.vue';
-import { useAuth0 } from '@auth0/auth0-vue'
-
-import router from '@/router'
-
-const { isAuthenticated, isLoading } = useAuth0()
-
-
-
-
-
+  import { RouterView } from 'vue-router'
+  import NavBar from './components/icons/NavBar.vue';
 
 </script>
 
 <template>
-
-  <NavBar v-if="1" />
+  <NavBar />
   <RouterView />
-  <!-- <div style="margin-bottom: 34px; margin-left: auto;">auth {{ isAuthenticated  }} <br>load {{  isLoading }}</div> -->
 </template>
 
 <style scoped>

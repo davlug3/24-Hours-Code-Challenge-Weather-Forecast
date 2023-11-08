@@ -11,9 +11,9 @@
 
         <RouterLink :to="'/'">
             <!-- <img src="" alt=""> -->
-            <h1>WF</h1>
+            <h1>Weather Forecast</h1>
         </RouterLink>
-        <RouterLink :to="'/logout'">
+        <RouterLink :to="'/logout'" v-if="!isLoading && isAuthenticated">
             <button>Logout</button>
         </RouterLink>
 
@@ -26,8 +26,10 @@
     import {RouterLink}  from 'vue-router'
     import router from '@/router'
 
+    import { useAuth0  } from '@auth0/auth0-vue'
 
-
+    const auth0 = useAuth0()
+    const { isAuthenticated, isLoading } = auth0 
 </script>
 
 <style scoped>

@@ -18,8 +18,4 @@ For the API keys,  create a file called auth_config.json on the root folder:
   "clientId": "**** AUTH0 CLIENT ID ****",
   "weather": "  **** OPENWEATHERMAP.COM API KEY ****"
 }
-<<<<<<< HEAD
 ```
-=======
-```
->>>>>>> 2666bf8919d490c99d1931d99af06d9855cc6f79

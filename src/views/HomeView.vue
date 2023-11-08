@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <!-- <pre>{{ user }}</pre> -->
-       
             <div class="field">{{ user.nickname }}</div>
             <div class="field"><a :href="url">{{ url }}</a></div>
 
             <div class="field">
-                <input type="text" v-model="city" placeholder="City">
-                <div><button type="button" @click="viewWeather(city)">Display Weather</button></div>
+                <form @submit.prevent="viewWeather(city)">
+                    <input type="text" v-model="city" placeholder="City">
+                    <div><button type="button">Display Weather</button></div>
+                </form>
             </div>
 
     </div>

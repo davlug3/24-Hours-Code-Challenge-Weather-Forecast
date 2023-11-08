@@ -2,7 +2,7 @@
     <div class="container">
 
         <div class="content">
-          <table>
+          <table v-if="lat && lon">
             <thead>
               <tr class="header-1">
                 <th v-for="item in data" :key="item.key" :class="{'desktop-only': item.desktopOnly}">{{  item.name_a }}</th>
@@ -18,12 +18,11 @@
             </tbody>
           </table>
 
+          <div class="nodata" v-else>No data.</div>
 
-          <button>Back</button>
+
+          <button @click="goBack()">Back</button>
         </div>
-        
-
-
     </div> 
 
 </template>    
@@ -32,9 +31,10 @@
 <script setup>
     import axios from 'axios'
     import moment from 'moment'
-    import {ref, onMounted, computed} from 'vue'
+    import {ref, onMounted} from 'vue'
     import { useRoute } from 'vue-router'
     import { weather as owm_api_key } from '../../auth_config.json'
+    import router from '@/router'
 
     const route = useRoute()
 
@@ -77,35 +77,25 @@
     ])
 
 
-    const getHeaderRows = computed(() => {
-      return data.value.map(x=> {
-        return Array.isArray(x.name) ? [...x.name] : [x.name]
-      })
-    })
-
-
-
-    const numOfHeaderRows = computed(()=> {
-      return getHeaderRows.value.reduce((prev, curr)=> {
-        return curr.length > prev ? curr.length : prev
-      }, 0)
-    })
-    
-    console.log("getHeaderRows: ", getHeaderRows.value, numOfHeaderRows.value);
 
 
     const city = ref('')
+    
+     const lat = ref(0);
+     const lon = ref(0);
+   
+
+     const goBack = () =>router.go(-1)
 
     const getWeatherForecast = async () => {
 
-        
-         const lat = ref(0);
-         const lon = ref(0);
-       
 
          const apiUrl_geotag = `http://api.openweathermap.org/geo/1.0/direct?q=${route.params.city}&appid=${owm_api_key}`;
+         console.log("apiUrl_geotag: ", apiUrl_geotag);
          try {
            const response = await axios.get(apiUrl_geotag);
+           console.log("response: ", response.data[0]);
+           
            lat.value = response.data[0].lat
            lon.value = response.data[0].lon
            city.value = response.data[0].name
@@ -192,9 +182,13 @@
       display: none;
     }
 
-    table {
-      width: 90vw;
-      margin: 2em;
+    .container {
+      padding: 5em;
     }
   }
+
+.nodata {
+  text-align: center ;
+  font-size: 1.5em;
+}
 </style>
