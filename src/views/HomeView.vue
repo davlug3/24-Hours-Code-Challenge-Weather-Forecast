@@ -6,7 +6,7 @@
             <div class="field">
                 <form @submit.prevent="viewWeather(city)">
                     <input type="text" v-model="city" placeholder="City">
-                    <div><button type="button">Display Weather</button></div>
+                    <div><button type="submit">Display Weather</button></div>
                 </form>
             </div>
 

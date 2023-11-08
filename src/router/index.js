@@ -50,13 +50,11 @@ const router = createRouter({
 
 
 
-router.beforeEach(async (to, from) => {
-  console.log("from: ",  from);
-  console.log("to: ", to);
+router.beforeEach(async (to) => {
+
 
   const auth0 = useAuth0();
   const { isAuthenticated, isLoading } = auth0
-  console.log("isLoading: ", isLoading.value);
 
 
   const canUserAccess = async () => {
@@ -76,7 +74,6 @@ router.beforeEach(async (to, from) => {
 
 
   const canAcess = await canUserAccess()
-  console.log("canAcess: ", canAcess);
 
   if (canAcess && to.meta.requiresAuth) {
     return true
@@ -97,7 +94,6 @@ router.beforeEach(async (to, from) => {
     return "/login"
   }
 
-  console.log('passthrrou')
 })
 
 
